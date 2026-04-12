@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<h2 class="mt-4">{{ category|capitalize }} Collection</h2>
+
+<div class="row mt-3">
+
+    {% for p in products %}
+    <div class="col-md-4">
+        <div class="card p-3 shadow mb-4 text-center">
+
+            <img src="{{ url_for('static', filename='images/' + p.image) }}" 
+                 class="img-fluid mb-2" style="height:150px; object-fit:cover;">
+
+            <h5>{{ p.name }}</h5>
+            <p class="text-success">₹{{ p.price }}</p>
+
+            <a href="/product/{{ p.id }}" class="btn btn-outline-primary btn-sm">View</a>
+            <a href="/add_to_cart/{{ p.id }}" class="btn btn-success btn-sm">Add</a>
+
+        </div>
+    </div>
+    {% endfor %}
+
+</div>
+
+{% endblock %}
