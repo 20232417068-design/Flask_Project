@@ -1,0 +1,84 @@
+{% extends 'base.html' %}
+{% load custom_filters %} 
+{% block content %}
+
+<div class="container mt-5">
+
+    <div class="checkout-card p-5">
+
+        <h2 class="text-center mb-4 checkout-title">
+            🧾 Checkout
+        </h2>
+
+        <!-- ORDER SUMMARY -->
+        <h5 class="mb-3 fw-bold">Order Summary</h5>
+
+        <table class="table table-hover text-center align-middle">
+
+            <thead class="checkout-header">
+                <tr>
+                    <th>Product</th>
+                    <th>Qty</th>
+                    <th>Total</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                {% for item in cart_items %}
+                <tr>
+                    <td>{{ item.product.name }}</td>
+                    <td>{{ item.quantity }}</td>
+                    <td class="text-success fw-bold">
+                        ₹{{ item.product.price|multiply:item.quantity }}
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+
+        </table>
+
+        <div class="text-end mb-4">
+            <h4>Total: <span class="text-success">₹{{ total }}</span></h4>
+        </div>
+
+        <hr>
+
+        <!-- FORM -->
+        <form method="POST">
+            {% csrf_token %}
+
+            <div class="row">
+                <div class="col-md-6">
+                    <input type="text" name="name" class="form-control custom-input" placeholder="Full Name" required>
+                </div>
+
+                <div class="col-md-6">
+                    <input type="text" name="city" class="form-control custom-input" placeholder="City" required>
+                </div>
+            </div>
+
+            <input type="text" name="address" class="form-control custom-input mt-3" placeholder="Address" required>
+            <input type="text" name="pincode" class="form-control custom-input mt-3" placeholder="Pincode" required>
+
+            <!-- PAYMENT -->
+            <h5 class="mt-4 fw-bold">Payment Method</h5>
+
+            <select name="payment" class="form-control custom-input mt-2" required>
+                <option value="">-- Select Payment --</option>
+                <option value="cod">Cash on Delivery</option>
+                <option value="upi">UPI</option>
+                <option value="card">Card</option>
+            </select>
+
+            <!-- BUTTON -->
+            <button class="btn place-order-btn mt-4">
+                Place Order ✅
+            </button>
+
+        </form>
+
+    </div>
+
+</div>
+
+{% endblock %}

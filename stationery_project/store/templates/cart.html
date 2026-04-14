@@ -1,0 +1,91 @@
+{% extends 'base.html' %}
+{% load custom_filters %}
+
+{% block content %}
+
+<div class="container mt-5">
+<h2 class="mb-4 d-flex justify-content-center align-items-center gap-2 cart-title">
+    <span class="cart-icon">🛒</span> Your Cart
+</h2>
+
+    {% if cart_items %}
+
+    <div class="card cart-card p-4">
+
+        <table class="table table-hover text-center align-middle">
+            
+            <thead class="table-dark">
+                <tr>
+                    <th>Product</th>
+                    <th>Price</th>
+                    <th>Quantity</th>
+                    <th>Total</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                {% for item in cart_items %}
+                <tr>
+
+                    <td class="fw-bold">{{ item.product.name }}</td>
+
+                    <td class="fw-bold">₹{{ item.product.price }}</td>
+
+                    <!-- 🔥 Quantity -->
+                    <td>
+                        <div class="d-flex justify-content-center align-items-center gap-2">
+
+                            <a href="{% url 'update_quantity' item.id 'decrease' %}" 
+                               class="btn btn-danger btn-sm">-</a>
+
+                            <span class="fw-bold">{{ item.quantity }}</span>
+
+                            <a href="{% url 'update_quantity' item.id 'increase' %}" 
+                               class="btn btn-success btn-sm">+</a>
+
+                        </div>
+                    </td>
+
+                    <td class="fw-bold">₹{{ item.product.price|multiply:item.quantity }}</td>
+
+                    <td>
+                        <a href="{% url 'remove' item.id %}" 
+                           class="btn btn-warning btn-sm">
+                           Remove
+                        </a>
+                    </td>
+
+                </tr>
+                {% endfor %}
+            </tbody>
+
+        </table>
+
+        <!-- TOTAL -->
+        <h4 class="text-end mt-3">
+            Total: <span class="text-success fw-bold fs-4">₹{{ total }}</span>
+        </h4>
+
+        <!-- ✅ CHECKOUT BUTTON -->
+        <div class="text-end mt-3">
+            <a href="{% url 'checkout' %}" class="btn btn-primary px-4 py-2">
+                Proceed to Checkout 💳
+            </a>
+        </div>
+
+    </div>
+
+    {% else %}
+
+    <!-- EMPTY CART -->
+    <div class="text-center mt-5">
+        <h4 class="text-muted">Your cart is empty 😢</h4>
+        <a href="/" class="btn btn-primary mt-3">Shop Now</a>
+    </div>
+
+    {% endif %}
+
+</div>
+
+{% endblock %}

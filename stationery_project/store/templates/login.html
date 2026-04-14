@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="row justify-content-center mt-5">
+    <div class="col-md-4">
+
+        <div class="card p-4 text-center">
+            <h3 class="text-center mb-3">🔐 Login</h3>
+   <!-- 🔥 MESSAGE SHOW -->
+            
+            <form method="post">
+                {% csrf_token %}
+
+                <input name="username" class="form-control mb-3" placeholder="Username">
+
+                <input name="password" type="password" class="form-control mb-3" placeholder="Password">
+
+                <button class="btn btn-success w-100">Login</button>
+            </form>
+
+            <p class="text-center mt-3">
+                Don't have account? <a href="/register/">Register</a>
+            </p>
+
+        </div>
+
+    </div>
+
+</div>
+<style>
+.form-control {
+    border-radius: 10px;
+    padding: 10px;
+}
+</style>
+
+{% endblock %}
