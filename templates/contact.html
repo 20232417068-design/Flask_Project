@@ -1,0 +1,71 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<div class="container d-flex justify-content-center align-items-center" style="min-height: 80vh;">
+
+    <div class="card shadow-lg p-4" style="width: 500px; border-radius: 15px;">
+
+        
+        <h2 class="text-center mb-4 fw-bold">📩 Contact Us</h2>
+
+    
+        {% with messages = get_flashed_messages(with_categories=true) %}
+          {% if messages %}
+            {% for category, message in messages %}
+              <div class="alert alert-{{ category }} text-center">
+                {{ message }}
+              </div>
+            {% endfor %}
+          {% endif %}
+        {% endwith %}
+
+        
+        <form method="POST">
+
+            <div class="mb-3">
+                <label class="form-label">Your Name</label>
+                <input type="text" name="name" class="form-control" placeholder="Enter your name" required>
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Contact Number</label>
+                <input type="text" name="contact_no" class="form-control" placeholder="Enter your contact number" required>
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">Your Message</label>
+                <textarea name="message" rows="4" class="form-control" placeholder="Write your message..." required></textarea>
+            </div>
+
+            <button class="btn btn-primary w-100">Send Message</button>
+            <style>
+body {
+    background: linear-gradient(to right, #dfe9f3, #ffffff);
+}
+
+.card {
+    border: none;
+}
+
+.form-control {
+    border-radius: 8px;
+}
+
+button {
+    border-radius: 8px;
+    font-weight: 500;
+    transition: 0.3s;
+}
+
+button:hover {
+    transform: scale(1.02);
+}
+</style>
+
+        </form>
+        
+
+    </div>
+
+</div>
+
+{% endblock %}

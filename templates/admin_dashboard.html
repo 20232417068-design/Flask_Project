@@ -1,0 +1,109 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<div class="container mt-5">
+
+    
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h2>Admin Dashboard ⚙️</h2>
+
+        <div>
+            <a href="/add_product" class="btn btn-success">+ Add Product</a>
+            <a href="/admin_logout" class="btn btn-danger">Logout</a>
+        </div>
+    </div>
+
+    
+    <div class="row text-center mb-4">
+
+        <div class="col-md-4">
+            <div class="card shadow p-3">
+                <h5>Total Products</h5>
+                <h3>{{ products|length }}</h3>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="card shadow p-3">
+                <h5>Total Orders</h5>
+                <h3>{{ orders|length }}</h3>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="card shadow p-3">
+                <h5>Total Users</h5>
+                <h3>{{ users|length if users else 0 }}</h3>
+            </div>
+        </div>
+
+    </div>
+
+    
+    <div class="card shadow mb-5">
+        <div class="card-header bg-dark text-white">
+            <h5 class="mb-0">Products</h5>
+        </div>
+
+        <div class="card-body">
+            <table class="table table-bordered table-hover text-center">
+
+                <tr>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Price</th>
+                    <th>Action</th>
+                </tr>
+
+                {% for p in products %}
+                <tr>
+                    <td>{{ p.id }}</td>
+                    <td>{{ p.name }}</td>
+                    <td>₹{{ p.price }}</td>
+                    <td>
+                        <a href="/delete/{{ p.id }}" class="btn btn-sm btn-danger">Delete</a>
+                    </td>
+                </tr>
+                {% endfor %}
+
+            </table>
+        </div>
+    </div>
+
+    
+    <div class="card shadow">
+        <div class="card-header bg-primary text-white">
+            <h5 class="mb-0">Orders</h5>
+        </div>
+
+        <div class="card-body">
+            <a href="/admin_clear_orders" class="btn btn-danger"
+           onclick="return confirm('Are you sure you want to clear all orders?');">🗑Clear Orders</a>
+            <table class="table table-bordered table-hover text-center">
+
+                <tr>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Address</th>
+                    <th>Items</th>
+                    <th>Date</th>
+                </tr>
+
+                {% for o in orders %}
+                
+                <tr>
+                    <td>{{ o.id }}</td>
+                    <td>{{ o.customer_name }}</td>
+                    <td>{{ o.address }}</td>
+                    <td>{{ o.items }}</td>
+                    <td>{{ o.date.strftime("%d-%m-%Y") if o.date else "-" }}</td>
+                </tr>
+                {% endfor %}
+
+            </table>
+        </div>
+    </div>
+
+</div>
+
+{% endblock %}

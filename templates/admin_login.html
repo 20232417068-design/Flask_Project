@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<div class="container d-flex justify-content-center align-items-center" style="height: 90vh;">
+
+    <div class="card shadow-lg p-4" style="width: 400px; border-radius: 15px;">
+
+        
+        <h3 class="text-center mb-4 fw-bold">Admin Login 🔐</h3>
+
+        
+        
+  
+        
+        <form method="POST">
+
+            <div class="mb-3">
+                <label class="form-label fw-semibold">Username</label>
+                <input type="text" name="username" class="form-control" placeholder="Enter admin username" required>
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label fw-semibold">Password</label>
+                <input type="password" name="password" class="form-control" placeholder="Enter password" required>
+            </div>
+
+            <button class="btn btn-danger w-100 py-2 fw-semibold">Login</button>
+
+        </form>
+
+        <p class="text-center mt-3 text-muted small">
+            🔒 Only authorized admin can access
+        </p>
+        <p class="text-center text-secondary small">
+    <strong>Demo Credentials:</strong><br>
+    Username: <span class="text-dark">admin</span><br>
+    Password: <span class="text-dark">123</span>
+</p>
+
+    </div>
+
+</div>
+
+{% endblock %}

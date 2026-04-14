@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<div class="container mt-5">
+
+    <h2 class="mb-4 text-center">Our Products</h2>
+
+    
+    <div class="mb-4 text-center">
+
+    <a href="/products" class="btn btn-dark">All</a>
+
+    <a href="/category/plate" class="btn btn-primary">Plates</a>
+    <a href="/category/glass" class="btn btn-success">Glasses</a>
+    <a href="/category/bowl" class="btn btn-warning">Bowls</a>
+
+    <a href="/category/pressure-cooker" class="btn btn-info">Pressure Cooker</a>
+    <a href="/category/spoon-set" class="btn btn-secondary">Spoon Set</a>
+    <a href="/category/bottle" class="btn btn-secondary">Bottles</a>
+    <a href="/category/lunch-box" class="btn btn-secondary">Lunch Box</a>
+    <a href="/category/kadai" class="btn btn-secondary">Kadai</a>
+    <a href="/category/frying-pan" class="btn btn-secondary">Frying Pan</a>
+
+</div>
+    <div class="row">
+
+        {% for p in products %}
+        <div class="col-md-4 mb-4">
+
+            <div class="card p-3 text-center shadow">
+
+                <img src="{{ url_for('static', filename='images/' + p.image) }}" height="180">
+
+                <h5 class="mt-3">{{ p.name }}</h5>
+
+                <p class="text-success fw-bold">₹{{ p.price }}</p>
+
+                <a href="/product/{{ p.id }}" class="btn btn-primary btn-sm">View</a>
+
+            </div>
+
+        </div>
+        {% endfor %}
+
+    </div>
+
+</div>
+
+{% endblock %}

@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<div class="container mt-5 d-flex justify-content-center">
+
+    <div class="card shadow p-4" style="width: 450px; border-radius: 12px;">
+
+        <h3 class="text-center mb-4">Add New Product 🛒</h3>
+
+        <form method="POST">
+
+            <div class="mb-3">
+                <label class="form-label">Product Name</label>
+                <input type="text" name="name" class="form-control" placeholder="Enter product name" required>
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">Price (₹)</label>
+                <input type="number" name="price" class="form-control" placeholder="Enter price" required>
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">Description</label>
+                <textarea name="description" class="form-control" rows="3" placeholder="Enter description"></textarea>
+            </div>
+
+            <button class="btn btn-success w-100">Add Product</button>
+
+        </form>
+
+    </div>
+
+</div>
+
+{% endblock %}
